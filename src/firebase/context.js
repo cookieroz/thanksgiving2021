@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "./config";
+import {Loading} from "../components/loading";
 
 const AuthContext = React.createContext();
 
@@ -16,6 +17,20 @@ export const AuthProvider = ({ children }) => {
   const logout = () => auth.signOut();
 
   const resetPassword = (email) => auth.sendPasswordResetEmail(email);
+
+  // const getAllData = async () => {
+  //   try {
+  //     const unsub = await auth.onAuthStateChanged((user) => {
+  //       // added event listener
+  //       setCurrentUser(user);
+  //       // setLoading(false);
+  //     });
+  //     setUnsubscribe(unsub);
+  //
+  //   } catch (e) {
+  //
+  //   }
+  // };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -35,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? <Loading /> :  children}
     </AuthContext.Provider>
   );
 };

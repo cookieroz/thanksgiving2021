@@ -9,14 +9,13 @@ import {
   // useLocation,
 } from "react-router-dom";
 
-// import logo from "./logo.svg";
 import "./App.css";
 import { AuthProvider } from "./firebase";
 
 import { Dashboard } from "./pages/Dashboard";
+import { LoginPage } from "./pages/Login";
 import { SignUpPage } from "./pages/SignUp";
-import {LoginPage} from "./pages/Login";
-// import { AuthProvider } from "./firebase";
+import { PrivateRoute } from "./components/PrivateRoute/";
 
 const App = () => {
   return (
@@ -24,9 +23,9 @@ const App = () => {
       <Router>
         <div className="App">
           <Switch>
+            <PrivateRoute path="/" exact component={Dashboard} />
             <Route path="/sign-up" exact component={SignUpPage} />
             <Route path="/login" exact component={LoginPage} />
-            <Route path="/" component={Dashboard} />
           </Switch>
         </div>
       </Router>
@@ -52,6 +51,6 @@ const App = () => {
   //     </Router>
   //   </AuthProvider>
   // );
-}
+};
 
 export default App;

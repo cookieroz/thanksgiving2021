@@ -39,107 +39,98 @@
 // }
 
 import React, { useRef, useState } from "react";
-// import { Form, Card, Button, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {useAuth} from "../../firebase";
+import { useAuth } from "../../firebase";
 
 export const SignUpPage = () => {
-	const emailRef = useRef(null);
-	const passwordRef = useRef(null);
-	const passwordConfirmRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const passwordConfirmRef = useRef(null);
 
-	const { signup } = useAuth();
-	const [error, setError] = useState("");
-	const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-			return setError("Passwords do not match");
-		}
-		try {
-			setLoading(true);
-			setError("");
-			await signup(emailRef.current.value, passwordRef.current.value);
-		} catch (error) {
-			setError("failed to create an account");
-		}
-		setLoading(false);
-	};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Passwords do not match");
+    }
+    try {
+      setLoading(true);
+      setError("");
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch (error) {
+      setError("failed to create an account");
+    }
+    setLoading(false);
+  };
 
-	return (
-		<div>
-				<div>
-					<h2 className="text-center mb-4">Sign Up</h2>
-					{error && <p variant="danger">{error}</p>}
-					<form onSubmit={handleSubmit}>
-						<fieldset id="email">
-							<label>Email</label>
-							<input type="email" required ref={emailRef} />
-						</fieldset>
-						<fieldset id="password">
-							<label>Password</label>
-							<input
-								type="password"
-								required
-								ref={passwordRef}
-							/>
-						</fieldset>
-						<fieldset id="password-confirm">
-							<label>Password Confirmation</label>
-							<input
-								type="password"
-								required
-								ref={passwordConfirmRef}
-							/>
-						</fieldset>
-						<button type="submit" className="w-100" disabled={loading}>
-							Sign Up
-						</button>
-					</form>
-				</div>
-			<div className="text-center w-100 mt-2">
-				Already have an account? <Link to="/login">Log In</Link>
-			</div>
-		</div>
-	);
+  return (
+    <div>
+      <div>
+        <h2 className="text-center mb-4">Sign Up</h2>
+        {error && <p variant="danger">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <fieldset id="email">
+            <label>Email</label>
+            <input type="email" required ref={emailRef} />
+          </fieldset>
+          <fieldset id="password">
+            <label>Password</label>
+            <input type="password" required ref={passwordRef} />
+          </fieldset>
+          <fieldset id="password-confirm">
+            <label>Password Confirmation</label>
+            <input type="password" required ref={passwordConfirmRef} />
+          </fieldset>
+          <button type="submit" className="w-100" disabled={loading}>
+            Sign Up
+          </button>
+        </form>
+      </div>
+      <div className="text-center w-100 mt-2">
+        Already have an account? <Link to="/login">Log In</Link>
+      </div>
+    </div>
+  );
 
-	// return (
-	// 	<>
-	// 		<Card>
-	// 			<Card.Body>
-	// 				<h2 className="text-center mb-4">Sign Up</h2>
-	// 				{error && <Alert variant="danger">{error}</Alert>}
-	// 				<Form onSubmit={handleSubmit}>
-	// 					<Form.Group id="email">
-	// 						<Form.Label>Email</Form.Label>
-	// 						<Form.Control type="email" required ref={emailRef}></Form.Control>
-	// 					</Form.Group>
-	// 					<Form.Group id="password">
-	// 						<Form.Label>Password</Form.Label>
-	// 						<Form.Control
-	// 							type="password"
-	// 							required
-	// 							ref={passwordRef}
-	// 						></Form.Control>
-	// 					</Form.Group>
-	// 					<Form.Group id="password-confirm">
-	// 						<Form.Label>Password Confirmation</Form.Label>
-	// 						<Form.Control
-	// 							type="password"
-	// 							required
-	// 							ref={passwordConfirmRef}
-	// 						></Form.Control>
-	// 					</Form.Group>
-	// 					<Button type="submit" className="w-100" disabled={loading}>
-	// 						Sign Up
-	// 					</Button>
-	// 				</Form>
-	// 			</Card.Body>
-	// 		</Card>
-	// 		<div className="text-center w-100 mt-2">
-	// 			Already have an account? <Link to="/login">Log In</Link>
-	// 		</div>
-	// 	</>
-	// );
+  // return (
+  // 	<>
+  // 		<Card>
+  // 			<Card.Body>
+  // 				<h2 className="text-center mb-4">Sign Up</h2>
+  // 				{error && <Alert variant="danger">{error}</Alert>}
+  // 				<Form onSubmit={handleSubmit}>
+  // 					<Form.Group id="email">
+  // 						<Form.Label>Email</Form.Label>
+  // 						<Form.Control type="email" required ref={emailRef}></Form.Control>
+  // 					</Form.Group>
+  // 					<Form.Group id="password">
+  // 						<Form.Label>Password</Form.Label>
+  // 						<Form.Control
+  // 							type="password"
+  // 							required
+  // 							ref={passwordRef}
+  // 						></Form.Control>
+  // 					</Form.Group>
+  // 					<Form.Group id="password-confirm">
+  // 						<Form.Label>Password Confirmation</Form.Label>
+  // 						<Form.Control
+  // 							type="password"
+  // 							required
+  // 							ref={passwordConfirmRef}
+  // 						></Form.Control>
+  // 					</Form.Group>
+  // 					<Button type="submit" className="w-100" disabled={loading}>
+  // 						Sign Up
+  // 					</Button>
+  // 				</Form>
+  // 			</Card.Body>
+  // 		</Card>
+  // 		<div className="text-center w-100 mt-2">
+  // 			Already have an account? <Link to="/login">Log In</Link>
+  // 		</div>
+  // 	</>
+  // );
 };
