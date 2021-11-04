@@ -10,12 +10,12 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import { AuthProvider } from "./firebase";
 
 import { Dashboard } from "./pages/Dashboard";
 import { LoginPage } from "./pages/Login";
 import { SignUpPage } from "./pages/SignUp";
 import { PrivateRoute } from "./components/PrivateRoute/";
+import { AuthProvider } from "./contexts";
 
 const App = () => {
   return (
