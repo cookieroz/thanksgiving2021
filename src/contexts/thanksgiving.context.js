@@ -11,22 +11,20 @@ export const useThanksgiving = () => useContext(ThanksgivingContext);
 export const ThanksgivingProvider = ({ children }) => {
   const { currentUserUid } = useAuth();
   const { getAll: getAllGuests } = useDatabase(`guests`);
-  const { getAll: getAllPotluck } = useDatabase(`potluck`);
 
   const [currentGuest, setCurrentGuest] = useState({});
   const [error, setError] = useState(null);
   const [guests, setGuests] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [potluck, setPotluck] = useState([]);
 
   const data = useMemo(
     () => ({
       currentGuest,
       error,
       guests,
-      potluck,
+      // potluck,
       setGuests,
-      setPotluck,
+      // setPotluck,
     }),
     []
   );
@@ -62,11 +60,11 @@ export const ThanksgivingProvider = ({ children }) => {
       try {
         setLoading(true);
         const allGuests = await getAllGuests();
-        const allPotluck = await getAllPotluck();
+        // const allPotluck = await getAllPotluck();
         const cguest = allGuests?.filter((guest) => guest?.user_uid === currentUserUid);
         console.log('cguest', cguest[0])
         setGuests(allGuests);
-        setPotluck(allPotluck);
+        // setPotluck(allPotluck);
         setCurrentGuest(cguest[0])
         setError(false);
         setLoading(false);

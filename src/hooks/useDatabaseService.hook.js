@@ -1,22 +1,32 @@
 import { useState } from "react";
 import {
+  addDoc,
   collection,
   deleteDoc,
-  doc,
+  // doc,
   getDoc,
   getDocs,
-  setDoc,
+  // setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const useDatabase = (collectionPath) => {
+
+  // Add a new document with a generated id.
+  // const docRef = await addDoc(collection(db, "cities"), {
+  //   name: "Tokyo",
+  //   country: "Japan"
+  // });
+  // console.log("Document written with ID: ", docRef.id);
   const createRecord = async (recordProps) => {
     try {
-      const createdRecord = await setDoc(doc(db, collectionPath), recordProps);
+      const createdRecord = await addDoc(collection(db, collectionPath), recordProps);
       console.log("createdREcord", createdRecord);
+      return { id: createdRecord.id, ...createdRecord.data() };
     } catch (e) {
       console.log(`error: ${e}`);
+      return {}
     }
   };
 
@@ -26,9 +36,10 @@ export const useDatabase = (collectionPath) => {
       let data = [];
       querySnapshot.forEach((doc) => {
         console.log("doc", doc);
+        // let data = { id: doc.id };
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        data.push(doc.data());
+        data.push({ id: doc.id, ...doc.data() });
       });
 
       console.log("data", data);
