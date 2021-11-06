@@ -2,6 +2,7 @@ import React from "react";
 
 import { InputComponent, SelectComponent, SubmitComponent } from "../form";
 import { ATTENDING_OPTIONS, GUEST_FORM_FIELDS } from "./constants";
+import { GuestFormPotluck } from "./GuestFormPotluck.component";
 
 export const GuestForm = ({
   isLoading,
@@ -35,6 +36,7 @@ export const GuestForm = ({
         label="Are you able to attend Thanksgiving 2021?"
         options={ATTENDING_OPTIONS}
       />
+      <GuestFormPotluck isLoading={isLoading} />
       <SubmitComponent value={isLoading ? "loading ..." : submitText} />
     </form>
   </div>

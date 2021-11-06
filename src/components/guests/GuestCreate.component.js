@@ -3,6 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 
 import { useDatabase } from "../../hooks/useDatabaseService.hook";
 import { GuestForm } from "./GuestForm.component";
+import {formatGuestData} from "./utils";
 
 export const GuestCreate = ({ currentGuestId }) => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ export const GuestCreate = ({ currentGuestId }) => {
   const handleGuestCreateSubmit = async (data) => {
     try {
       setLoading(true);
-      const guestCreateData = { ...data, parentGuestId: currentGuestId };
+      const guestCreateData = formatGuestData({ ...data, parentGuestId: currentGuestId });
       await createRecord(guestCreateData);
       setLoading(false);
     } catch (e) {
