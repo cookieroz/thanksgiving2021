@@ -17,18 +17,6 @@ export const ThanksgivingProvider = ({ children }) => {
   const [guests, setGuests] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const data = useMemo(
-    () => ({
-      currentGuest,
-      error,
-      guests,
-      // potluck,
-      setGuests,
-      // setPotluck,
-    }),
-    []
-  );
-
   // const getAllData = async () => {
   //   try {
   //     const unsub = await auth.onAuthStateChanged((user) => {
@@ -61,11 +49,13 @@ export const ThanksgivingProvider = ({ children }) => {
         setLoading(true);
         const allGuests = await getAllGuests();
         // const allPotluck = await getAllPotluck();
-        const cguest = allGuests?.filter((guest) => guest?.user_uid === currentUserUid);
-        console.log('cguest', cguest[0])
+        const cguest = [...allGuests]?.filter(
+          (guest) => guest?.userUid === currentUserUid
+        );
+        console.log("cguest", cguest[0]);
+        setCurrentGuest(cguest[0]);
         setGuests(allGuests);
         // setPotluck(allPotluck);
-        setCurrentGuest(cguest[0])
         setError(false);
         setLoading(false);
       } catch (e) {
@@ -74,6 +64,18 @@ export const ThanksgivingProvider = ({ children }) => {
       }
     })();
   }, [currentUserUid]);
+
+  const data = useMemo(
+    () => ({
+      currentGuest,
+      error,
+      guests,
+      // potluck,
+      setGuests,
+      // setPotluck,
+    }),
+    [currentGuest, error, guests]
+  );
 
   return (
     <ThanksgivingContext.Provider value={data}>

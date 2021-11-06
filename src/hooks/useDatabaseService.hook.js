@@ -3,10 +3,11 @@ import {
   addDoc,
   collection,
   deleteDoc,
-  // doc,
+  doc,
   getDoc,
   getDocs,
   // setDoc,
+  serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
@@ -21,12 +22,23 @@ export const useDatabase = (collectionPath) => {
   // console.log("Document written with ID: ", docRef.id);
   const createRecord = async (recordProps) => {
     try {
-      const createdRecord = await addDoc(collection(db, collectionPath), recordProps);
+      const props = {...recordProps, createdAt: serverTimestamp()}
+      const createdRecord = await addDoc(collection(db, collectionPath), props);
       console.log("createdREcord", createdRecord);
       return { id: createdRecord.id, ...createdRecord.data() };
     } catch (e) {
       console.log(`error: ${e}`);
       return {}
+    }
+  };
+
+  const deleteRecord = async (id) => {
+    try {
+      const docRef = await getDoc(collection(db, collectionPath, id));
+      const data = await deleteDoc(docRef);
+      console.log("data in DELETE", data);
+    } catch (e) {
+      console.log(`error: ${e}`);
     }
   };
 
@@ -67,21 +79,12 @@ export const useDatabase = (collectionPath) => {
     }
   };
 
-  const update = async (id, propsToUpdate) => {
+  const updateRecord = async (id, propsToUpdate) => {
     try {
-      const docRef = await getDoc(collection(db, collectionPath, id));
-      const data = await updateDoc(docRef, propsToUpdate);
+      const props = {...propsToUpdate, updatedAt: serverTimestamp()}
+      const docRef = doc(db, collectionPath, id);
+      const data = await updateDoc(docRef, props);
       console.log("data in UPDATE", data);
-    } catch (e) {
-      console.log(`error: ${e}`);
-    }
-  };
-
-  const deleteRecord = async (id) => {
-    try {
-      const docRef = await getDoc(collection(db, collectionPath, id));
-      const data = await deleteDoc(docRef);
-      console.log("data in DELETE", data);
     } catch (e) {
       console.log(`error: ${e}`);
     }
@@ -92,7 +95,7 @@ export const useDatabase = (collectionPath) => {
     deleteRecord,
     getAll,
     getRecord,
-    update,
+    updateRecord,
   };
 };
 

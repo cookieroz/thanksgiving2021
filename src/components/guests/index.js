@@ -1,2 +1,2 @@
-export * from "./AddGuest.component";
-export * from "./EditGuest.component";
+export * from "./GuestCreate.component";
+export * from "./GuestEdit.component";
