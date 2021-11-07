@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { Loading } from "../components/loading";
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
 
   const signup = (email, password) =>
@@ -18,19 +18,6 @@ export const AuthProvider = ({ children }) => {
 
   const resetPassword = (email) => auth.sendPasswordResetEmail(email);
 
-  // const getAllData = async () => {
-  //   try {
-  //     const unsub = await auth.onAuthStateChanged((user) => {
-  //       // added event listener
-  //       setCurrentUser(user);
-  //       // setLoading(false);
-  //     });
-  //     setUnsubscribe(unsub);
-  //
-  //   } catch (e) {
-  //
-  //   }
-  // };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

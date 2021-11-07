@@ -8,7 +8,7 @@ export const hour = minute * 60;
 export const day = hour * 24;
 
 export const getDistance = () => thanksgivingDateTime - getNowTime();
-export const isPlural = (count, word) => (count === 1 ? `${count} ${word}` : `${count} ${word}s`);
+export const isPlural = (count, word) => (count === 1 ? word : `${word}s`);
 
 export const getDaysPast = () => {
   const now = getNowTime();
@@ -24,7 +24,7 @@ export const getCountdownMessage = () => {
     const daysPast = getDaysPast();
     return daysPast < hour * 12
       ? "Today is Thanksgiving!"
-      : `${isPlural(daysPast, "day")} since Thanksgiving 2021.`;
+      : `${daysPast} ${isPlural(daysPast, "day")} since Thanksgiving 2021.`;
   } else {
     return "Until Thanksgiving";
   }

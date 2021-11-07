@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import {Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../firebase";
 import {useDatabase} from "../../hooks/useDatabaseService.hook";
+import {useAuth} from "../../contexts";
 
 export const SignUpPage = () => {
   const { createRecord } = useDatabase(`guests`);

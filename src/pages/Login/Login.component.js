@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {useAuth} from "../../firebase";
+import {useAuth} from "../../contexts";
 
 export const LoginPage = () => {
 	const emailRef = useRef(null);
