@@ -11,7 +11,7 @@ import {
 
 import "./App.css";
 
-import { Dashboard } from "./pages/Dashboard";
+import { Homepage } from "./pages/Home";
 import { LoginPage } from "./pages/Login";
 import { SignUpPage } from "./pages/SignUp";
 import { PrivateRoute } from "./components/PrivateRoute/";
@@ -23,7 +23,7 @@ const App = () => {
       <Router>
         <div className="App">
           <Switch>
-            <PrivateRoute path="/" exact component={Dashboard} />
+            <PrivateRoute path="/" exact component={Homepage} />
             <Route path="/sign-up" exact component={SignUpPage} />
             <Route path="/login" exact component={LoginPage} />
           </Switch>

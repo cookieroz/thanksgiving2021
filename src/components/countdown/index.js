@@ -1,1 +1,1 @@
-export * from "./CountdownTimer.component";
+export * from "./Countdown.component";

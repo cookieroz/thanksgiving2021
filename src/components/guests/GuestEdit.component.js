@@ -7,6 +7,7 @@ import { GUEST_FORM_FIELDS } from "./constants";
 import {formatGuestData} from "./utils";
 
 export const GuestEdit = ({ guestToEdit = {} }) => {
+  const { id: guestId } = guestToEdit;
   const [loading, setLoading] = useState(false);
   const { updateRecord } = useDatabase(`guests`);
   const methods = useForm({
@@ -21,12 +22,7 @@ export const GuestEdit = ({ guestToEdit = {} }) => {
   });
   const { handleSubmit } = methods || {};
 
-  const { id: guestId } = guestToEdit;
-
-  console.log("guestToEdit", guestToEdit);
-
   const handleGuestEditSubmit = async (data) => {
-    console.log("guest EDIT data", data);
     try {
       setLoading(true);
       const dataToUpdate = formatGuestData(data);

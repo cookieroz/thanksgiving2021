@@ -11,8 +11,6 @@ export const GuestCreate = ({ currentGuestId }) => {
   const methods = useForm();
   const { handleSubmit } = methods || {};
 
-  console.log("currentGuestId", currentGuestId);
-
   const handleGuestCreateSubmit = async (data) => {
     try {
       setLoading(true);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
+
 import { Loading } from "../components/loading";
-// import {auth} from "../firebase";
 import { useAuth } from "./auth.context";
 import { useDatabase } from "../hooks/useDatabaseService.hook";
 
@@ -65,16 +65,26 @@ export const ThanksgivingProvider = ({ children }) => {
     })();
   }, [currentUserUid]);
 
+  const potluck = useMemo(
+    () => guests?.map(({ potluck }) => potluck),
+    [guests]
+  );
+
+  const myGuests = useMemo(
+    () => guests?.filter(({ id }) => id === currentGuest.id),
+    [currentGuest.id, guests]
+  );
+
   const data = useMemo(
     () => ({
       currentGuest,
       error,
       guests,
-      // potluck,
+      myGuests,
+      potluck,
       setGuests,
-      // setPotluck,
     }),
-    [currentGuest, error, guests]
+    [currentGuest, error, guests, myGuests, potluck]
   );
 
   return (
