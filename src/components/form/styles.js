@@ -30,8 +30,10 @@ export const SubmitStyled = styled.input.attrs({ type: "submit" })`
   background-color: ${COLORS.militaryGreen};
   border-radius: 0;
   border: none;
+  display: block;
   font-weight: 500;
   padding: 0.25rem 0.5rem;
+  margin: 0.25rem auto;
 
   &:hover {
     background-color: ${COLORS.brass};

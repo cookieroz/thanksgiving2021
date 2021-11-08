@@ -29,7 +29,7 @@ export const GuestForm = ({
       <InputComponent
         disabled={isLoading}
         fieldName={GUEST_FORM_FIELDS.location}
-        label="Guest Location (optional)"
+        label="Guest arriving from where / location? (optional)"
       />
       <SelectComponent
         disabled={isLoading}

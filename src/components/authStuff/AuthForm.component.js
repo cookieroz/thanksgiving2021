@@ -5,6 +5,7 @@ import { ThanksgivingTitle } from "../../styles";
 import { InputComponent, SubmitComponent } from "../form";
 
 export const AuthForm = ({
+  children,
   hasPasswordMatch,
   isLoading,
   onSubmit,
@@ -23,6 +24,8 @@ export const AuthForm = ({
       <ThanksgivingTitle>{title}</ThanksgivingTitle>
 
       <form onSubmit={onSubmit}>
+        {children}
+
         <InputComponent
           disabled={isLoading}
           fieldName="email"
@@ -32,18 +35,23 @@ export const AuthForm = ({
               message: "Please enter an email.",
             },
           }}
-          label="Email"
+          label="📧 Email"
         />
         <InputComponent
           disabled={isLoading}
           fieldName="password"
           registerOptions={{
+            minLength: {
+              message: "Password must have at least 6 characters",
+              value: 6,
+            },
             required: {
-              value: true,
               message: "Please enter a password.",
+              value: true,
             },
           }}
-          label="Password"
+          label="🔑 Password"
+          type="password"
         />
         {hasPasswordMatch && (
           <InputComponent
@@ -57,7 +65,8 @@ export const AuthForm = ({
                 message: "Please confirm password.",
               },
             }}
-            label="Password"
+            label="👯 Confirm password"
+            type="password"
           />
         )}
 
