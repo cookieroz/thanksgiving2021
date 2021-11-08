@@ -1,18 +1,20 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-export const FieldWrapper = ({ children, fieldName, label }) => {
+import { FieldError, FieldWrapperStyled } from "./styles";
+
+export const FieldWrapper = ({ children, isRow, fieldName, label }) => {
   const {
     formState: { errors },
   } = useFormContext();
 
   return (
-    <div>
+    <FieldWrapperStyled isRow={isRow}>
       {label && <label>{label}</label>}
       {children}
       {errors[fieldName]?.message && (
-        <small>{errors[fieldName]?.message}</small>
+        <FieldError>{errors[fieldName]?.message}</FieldError>
       )}
-    </div>
+    </FieldWrapperStyled>
   );
 };

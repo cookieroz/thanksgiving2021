@@ -1,7 +1,8 @@
 import React from "react";
+import { SubmitStyled } from "./styles";
 
 export const SubmitComponent = (props) => (
 	<div>
-		<input type="submit" {...props}/>
+		<SubmitStyled type="submit" {...props}/>
 	</div>
 );

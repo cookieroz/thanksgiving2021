@@ -23,9 +23,9 @@ export const getCountdownMessage = () => {
   if (distance < 0) {
     const daysPast = getDaysPast();
     return daysPast < hour * 12
-      ? "Today is Thanksgiving!"
-      : `${daysPast} ${isPlural(daysPast, "day")} since Thanksgiving 2021.`;
+      ? `🍗 Today is Thanksgiving! 🍗`
+      : `🍁 ${daysPast} ${isPlural(daysPast, "day")} since Thanksgiving 2021. 🍁`;
   } else {
-    return "Until Thanksgiving";
+    return `🍂 Woohoo Countdown is on! 🍂`;
   }
 };

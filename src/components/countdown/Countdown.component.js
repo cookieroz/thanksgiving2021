@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { CountdownClock } from "./CountdownClock.component";
 import { getDistance, getCountdownMessage } from "./utils";
+import { CountdownTitle, CountdownWrapper } from "./styles";
 
 export const Countdown = () => {
   const [hasCountdown, setHasCountdown] = useState(false);
@@ -13,9 +14,9 @@ export const Countdown = () => {
   }, []);
 
   return (
-    <div>
+    <CountdownWrapper>
+      <CountdownTitle>{message}</CountdownTitle>
       {hasCountdown && <CountdownClock />}
-      <h4>{message}</h4>
-    </div>
+    </CountdownWrapper>
   );
 };

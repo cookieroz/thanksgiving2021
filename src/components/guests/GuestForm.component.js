@@ -1,5 +1,6 @@
 import React from "react";
 
+import { ThanksgivingTitle } from "../../styles";
 import { InputComponent, SelectComponent, SubmitComponent } from "../form";
 import { ATTENDING_OPTIONS, GUEST_FORM_FIELDS } from "./constants";
 import { GuestFormPotluck } from "./GuestFormPotluck.component";
@@ -11,7 +12,7 @@ export const GuestForm = ({
   title = "Add a Guest",
 }) => (
   <div>
-    <h4>{title}</h4>
+    <ThanksgivingTitle>{title}</ThanksgivingTitle>
 
     <form onSubmit={onSubmit}>
       <InputComponent
@@ -20,7 +21,7 @@ export const GuestForm = ({
         registerOptions={{
           required: {
             value: true,
-            message: "Please enter your name.",
+            message: "Please enter guest name.",
           },
         }}
         label="Name"
@@ -28,15 +29,17 @@ export const GuestForm = ({
       <InputComponent
         disabled={isLoading}
         fieldName={GUEST_FORM_FIELDS.location}
-        label="Your Location (optional)"
+        label="Guest Location (optional)"
       />
       <SelectComponent
         disabled={isLoading}
         fieldName={GUEST_FORM_FIELDS.attending}
-        label="Are you able to attend Thanksgiving 2021?"
+        label="Able to attend Thanksgiving 2021?"
         options={ATTENDING_OPTIONS}
       />
+
       <GuestFormPotluck isLoading={isLoading} />
+
       <SubmitComponent value={isLoading ? "loading ..." : submitText} />
     </form>
   </div>

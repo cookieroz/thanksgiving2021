@@ -21,7 +21,7 @@ export const GuestFormPotluck = ({ isLoading }) => {
       <InputComponent
         disabled={isLoading}
         fieldName={displayPotluck}
-        label="Are you able to bring something?"
+        label="Is guest bringing something?"
         type="checkbox"
       />
       {watchDisplayPotluck && (
@@ -40,7 +40,7 @@ export const GuestFormPotluck = ({ isLoading }) => {
           <InputComponent
             disabled={isLoading}
             fieldName={potluckDescription}
-            label="Any additional info about what you want to bring?"
+            label="Any additional info about what is being brought?"
           />
         </>
       )}
