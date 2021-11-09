@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { useDatabase } from "../../hooks/useDatabaseService.hook";
 import { GuestForm } from "./GuestForm.component";
 import { GUEST_FORM_FIELDS } from "./constants";
-import {formatGuestData} from "./utils";
+import { GuestEditWrapper } from "./styles";
+import { formatGuestData } from "./utils";
 
-export const GuestEdit = ({ guestToEdit = {} }) => {
+export const GuestEdit = ({ guestToEdit = {}, loading, setLoading }) => {
   const { id: guestId } = guestToEdit;
-  const [loading, setLoading] = useState(false);
   const { updateRecord } = useDatabase(`guests`);
   const methods = useForm({
     defaultValues: {
@@ -16,8 +16,9 @@ export const GuestEdit = ({ guestToEdit = {} }) => {
       [GUEST_FORM_FIELDS.location]: guestToEdit.location,
       [GUEST_FORM_FIELDS.attending]: guestToEdit.attending,
       [GUEST_FORM_FIELDS.displayPotluck]: !!guestToEdit?.potluck?.item,
-      [GUEST_FORM_FIELDS.potluckItem]: guestToEdit?.potluck?.item || '',
-      [GUEST_FORM_FIELDS.potluckDescription]: guestToEdit?.potluck?.description || '',
+      [GUEST_FORM_FIELDS.potluckItem]: guestToEdit?.potluck?.item || "",
+      [GUEST_FORM_FIELDS.potluckDescription]:
+        guestToEdit?.potluck?.description || "",
     },
   });
   const { handleSubmit } = methods || {};
@@ -37,12 +38,15 @@ export const GuestEdit = ({ guestToEdit = {} }) => {
 
   return guestId ? (
     <FormProvider {...methods}>
-      <GuestForm
-        isLoading={loading}
-        onSubmit={handleSubmit(handleGuestEditSubmit)}
-        submitText="Edit Guest"
-        title={`Edit Guest ${guestToEdit.name || ""}`}
-      />
+      <GuestEditWrapper>
+        <GuestForm
+          isEdit
+          isLoading={loading}
+          onSubmit={handleSubmit(handleGuestEditSubmit)}
+          submitText="Save"
+          title=""
+        />
+      </GuestEditWrapper>
     </FormProvider>
   ) : null;
 };

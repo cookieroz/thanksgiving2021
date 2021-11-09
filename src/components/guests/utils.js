@@ -1,4 +1,4 @@
-import { GUEST_FORM_FIELDS } from "./constants";
+import {ATTENDING_OPTIONS, GUEST_FORM_FIELDS} from "./constants";
 const {
   attending,
   displayPotluck,
@@ -29,4 +29,10 @@ export const formatGuestData = (guestData) => {
     [name]: guestData[name],
     potluck,
   }
+};
+
+export const getAttendingText = (attendingValue) => {
+  const attendingValueNum = Number(attendingValue);
+  const option = ATTENDING_OPTIONS.filter(({ value }) => value === attendingValueNum)[0];
+  return option?.text || "";
 };

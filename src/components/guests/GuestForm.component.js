@@ -6,13 +6,14 @@ import { ATTENDING_OPTIONS, GUEST_FORM_FIELDS } from "./constants";
 import { GuestFormPotluck } from "./GuestFormPotluck.component";
 
 export const GuestForm = ({
+  isEdit,
   isLoading,
   onSubmit,
   submitText = "Add Guest",
   title = "Add a Guest",
 }) => (
   <div>
-    <ThanksgivingTitle>{title}</ThanksgivingTitle>
+    {title && <ThanksgivingTitle>{title}</ThanksgivingTitle>}
 
     <form onSubmit={onSubmit}>
       <InputComponent
@@ -29,16 +30,16 @@ export const GuestForm = ({
       <InputComponent
         disabled={isLoading}
         fieldName={GUEST_FORM_FIELDS.location}
-        label="Guest arriving from where / location? (optional)"
+        label={isEdit ? "Location" : "Guest arriving from where / location? (optional)"}
       />
       <SelectComponent
         disabled={isLoading}
         fieldName={GUEST_FORM_FIELDS.attending}
-        label="Able to attend Thanksgiving 2021?"
+        label={isEdit ? "Attending?" : "Able to attend Thanksgiving 2021?"}
         options={ATTENDING_OPTIONS}
       />
 
-      <GuestFormPotluck isLoading={isLoading} />
+      <GuestFormPotluck isEdit={isEdit} isLoading={isLoading} />
 
       <SubmitComponent value={isLoading ? "loading ..." : submitText} />
     </form>

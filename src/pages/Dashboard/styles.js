@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import {
-  BorderStyle,
   COLORS,
   ThanksgivingHightlight,
   ThanksgivingText,
 } from "../../styles";
-
-export const DashboardSpacer = styled.hr`
-  border: ${BorderStyle};
-`;
 
 export const DashboardWrapper = styled.div`
   margin: 0 auto;

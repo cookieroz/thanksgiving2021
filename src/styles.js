@@ -69,3 +69,7 @@ export const ThanksgivingText = styled.p`
 export const ThanksgivingHightlight = styled(ThanksgivingText)`
   font-weight: 600;
 `;
+
+export const ThanksgivingSpacer = styled.hr`
+  border: ${BorderStyle};
+`;
