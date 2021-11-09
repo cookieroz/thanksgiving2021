@@ -15,7 +15,7 @@ import {
   DashboardGridTopRightSquare,
   DashboardListItem,
 } from "./styles";
-import {GuestRow} from "../Guests/GuestRow.component";
+import {GuestRow} from "../../components/guests/GuestRow.component";
 
 export const Dashboard = () => {
   const { guests, myGuests, potluck } = useThanksgiving();

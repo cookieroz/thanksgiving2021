@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
   getAttendingText,
   GuestEdit,
-} from "../../components/guests";
+} from "./index";
 
 export const GuestRow = ({ guestToEdit = {} }) => {
   const { attending, location, name, potluck } = guestToEdit;
