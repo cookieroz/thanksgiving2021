@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
-import {
-  getAttendingText,
-  GuestEdit,
-} from "./index";
+import { GuestEdit } from "./GuestEdit.component";
+import { getAttendingText } from "./utils";
 
 export const GuestRow = ({ guestToEdit = {} }) => {
   const { attending, location, name, potluck } = guestToEdit;
@@ -12,7 +9,7 @@ export const GuestRow = ({ guestToEdit = {} }) => {
   const [loading, setLoading] = useState(false);
   const toggleEditMode = () => !loading && setIsEditMode(!isEditMode);
   const deleteGuest = () => {
-  	console.log("deleting guest")
+    console.log("deleting guest");
   };
 
   // const GuestRowDisplay = () => (
@@ -41,26 +38,25 @@ export const GuestRow = ({ guestToEdit = {} }) => {
 
   return (
     <div>
-
-	    <div>
-		    <p>
-			    <span>Name: </span>
-			    {name}
-		    </p>
-		    <p>
-			    <span>Is attending: </span>
-			    {getAttendingText(attending)}
-		    </p>
-		    <p>
-			    <span>Coming from: </span>
-			    {location}
-		    </p>
-		    <p>
-			    <span>Is bringing: </span>
-			    {potluck?.item}{" "}
-			    {potluck?.description && <small>{potluck?.description}</small>}
-		    </p>
-	    </div>
+      <div>
+        <p>
+          <span>Name: </span>
+          {name}
+        </p>
+        <p>
+          <span>Is attending: </span>
+          {getAttendingText(attending)}
+        </p>
+        <p>
+          <span>Coming from: </span>
+          {location}
+        </p>
+        <p>
+          <span>Is bringing: </span>
+          {potluck?.item}{" "}
+          {potluck?.description && <small>{potluck?.description}</small>}
+        </p>
+      </div>
 
       <GuestEdit
         guestToEdit={guestToEdit}
