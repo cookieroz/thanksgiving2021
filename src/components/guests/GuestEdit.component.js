@@ -49,18 +49,4 @@ export const GuestEdit = ({ guestToEdit = {}, loading, setLoading }) => {
       </GuestEditWrapper>
     </FormProvider>
   ) : null;
-
-  // return guestId ? (
-  //   <FormProvider {...methods}>
-  //     <GuestEditWrapper>
-  //       <GuestForm
-  //         isEdit
-  //         isLoading={loading}
-  //         onSubmit={handleSubmit(handleGuestEditSubmit)}
-  //         submitText="Save"
-  //         title=""
-  //       />
-  //     </GuestEditWrapper>
-  //   </FormProvider>
-  // ) : null;
 };

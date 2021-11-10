@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../firebase";
 
-import { Loading } from "../components/loading";
 import { useAuth } from "./auth.context";
+import { Loading } from "../components/loading";
 import { useDatabase } from "../hooks/useDatabaseService.hook";
 
 const ThanksgivingContext = React.createContext({});
@@ -17,28 +19,16 @@ export const ThanksgivingProvider = ({ children }) => {
   const [guests, setGuests] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // const getAllData = async () => {
-  //   try {
-  //     const unsub = await auth.onAuthStateChanged((user) => {
-  //       // added event listener
-  //       setCurrentUser(user);
-  //       // setLoading(false);
-  //     });
-  //     setUnsubscribe(unsub);
-  //
-  //   } catch (e) {
-  //
-  //   }
-  // };
+  useEffect(() => {
+    const q = query(collection(db, "guests"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
+      setGuests(data);
+    });
 
-  // useEffect(() => {
-  // 	const unsubscribe = auth.onAuthStateChanged((user) => {
-  // 		// added event listener
-  // 		setCurrentUser(user);
-  // 		setLoading(false);
-  // 	});
-  // 	return unsubscribe;
-  // }, []);
+    return () => unsubscribe;
+  }, []);
 
   useEffect(() => {
     if (!currentUserUid) {
@@ -48,14 +38,12 @@ export const ThanksgivingProvider = ({ children }) => {
       try {
         setLoading(true);
         const allGuests = await getAllGuests();
-        // const allPotluck = await getAllPotluck();
         const cguest = [...allGuests]?.filter(
           (guest) => guest?.userUid === currentUserUid
         );
-        console.log("cguest", cguest[0]);
+
         setCurrentGuest(cguest[0]);
         setGuests(allGuests);
-        // setPotluck(allPotluck);
         setError(false);
         setLoading(false);
       } catch (e) {
