@@ -9,16 +9,17 @@ import {
   ThanksgivingTitle,
 } from "../../styles";
 import {
+  DashboardGreeting,
   DashboardGrid,
   DashboardGridBottom,
   DashboardGridTopLeftSquare,
   DashboardGridTopRightSquare,
   DashboardListItem,
 } from "./styles";
-import {GuestRow} from "../../components/guests/GuestRow.component";
+import { GuestCreate, GuestRow } from "../../components/guests";
 
 export const Dashboard = () => {
-  const { guests, myGuests, potluck } = useThanksgiving();
+  const { currentGuest, guests, myGuests, potluck } = useThanksgiving();
   const totalYes = useMemo(
     () => guests?.filter(({ attending }) => Number(attending) === 1)?.length,
     [guests]
@@ -30,6 +31,7 @@ export const Dashboard = () => {
 
   return (
     <ThanksgivingPageWrapper>
+      <DashboardGreeting>{`Hi ${currentGuest?.name}!`}</DashboardGreeting>
       <ThanksgivingTitle>Current party stats</ThanksgivingTitle>
 
       <ThanksgivingSpacer />
@@ -53,21 +55,19 @@ export const Dashboard = () => {
 
         <DashboardGridBottom>
           <ThanksgivingHightlight>My guests:</ThanksgivingHightlight>
-          {myGuests?.map(({ id, name, potluck }) => (
-            <DashboardListItem key={`my-guest-name-${id}`}>
-              {name}
-              <small>potluck item: {potluck?.item}</small>
-            </DashboardListItem>
+          {myGuests?.map((guest) => (
+            <GuestRow
+              key={guest.id}
+              guestToEdit={guest}
+              isCurrentUser={guest.id === currentGuest?.id}
+            />
           ))}
         </DashboardGridBottom>
       </DashboardGrid>
 
       <ThanksgivingSpacer />
 
-      {myGuests?.map((guest) => <GuestRow key={guest.id} guestToEdit={guest} />)}
-
-      <ThanksgivingSpacer />
-
+      <GuestCreate currentGuestId={currentGuest?.id} />
     </ThanksgivingPageWrapper>
   );
 };

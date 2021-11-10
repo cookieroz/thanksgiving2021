@@ -2,13 +2,17 @@ import styled from "styled-components";
 import {
   COLORS,
   ThanksgivingHightlight,
-  ThanksgivingText,
+  ThanksgivingText, ThanksgivingTitle,
 } from "../../styles";
 
 export const DashboardWrapper = styled.div`
   margin: 0 auto;
-  max-width: 90%;
   padding: 1rem;
+`;
+
+export const DashboardGreeting = styled(ThanksgivingTitle)`
+  font-weight: 500;
+  margin-bottom: -0.5rem;
 `;
 
 export const DashboardGrid = styled(DashboardWrapper)`

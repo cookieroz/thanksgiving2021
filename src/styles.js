@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 
 const black = "#252422";
 const brass = "#CB997E";
@@ -27,6 +27,21 @@ export const COLORS = {
 };
 
 export const BorderStyle = `1px solid ${COLORS.brass}`;
+
+export const ButtonStyles = css`
+background-color: ${COLORS.militaryGreen};
+  border-radius: 0;
+  border: none;
+  display: block;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem auto;
+
+  &:hover {
+  background-color: ${COLORS.brass};
+    cursor: pointer;
+  }
+`;
 
 export const GlobalResetStyle = createGlobalStyle`
   * {
@@ -72,4 +87,8 @@ export const ThanksgivingHightlight = styled(ThanksgivingText)`
 
 export const ThanksgivingSpacer = styled.hr`
   border: ${BorderStyle};
+`;
+
+export const ThanksgivingButton = styled.button`
+  ${ButtonStyles};
 `;

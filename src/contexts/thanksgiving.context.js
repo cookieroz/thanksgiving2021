@@ -71,7 +71,11 @@ export const ThanksgivingProvider = ({ children }) => {
   );
 
   const myGuests = useMemo(
-    () => guests?.filter(({ id }) => id === currentGuest.id),
+    () =>
+      guests?.filter(
+        ({ id, parentGuestId }) =>
+          parentGuestId === currentGuest.id || id === currentGuest.id
+      ),
     [currentGuest.id, guests]
   );
 

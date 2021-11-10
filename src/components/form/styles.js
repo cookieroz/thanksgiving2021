@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { COLORS } from "../../styles";
+import {ButtonStyles, COLORS} from "../../styles";
 
 export const FieldWrapperStyled = styled.div`
   display: flex;
@@ -27,16 +27,10 @@ export const FieldError = styled.small`
 `;
 
 export const SubmitStyled = styled.input.attrs({ type: "submit" })`
+ ${ButtonStyles};
   background-color: ${COLORS.militaryGreen};
-  border-radius: 0;
-  border: none;
-  display: block;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem auto;
 
   &:hover {
     background-color: ${COLORS.brass};
-    cursor: pointer;
   }
 `;

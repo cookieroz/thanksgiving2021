@@ -13,18 +13,11 @@ import { db } from "../firebase";
 
 export const useDatabase = (collectionPath) => {
 
-  // Add a new document with a generated id.
-  // const docRef = await addDoc(collection(db, "cities"), {
-  //   name: "Tokyo",
-  //   country: "Japan"
-  // });
-  // console.log("Document written with ID: ", docRef.id);
   const createRecord = async (recordProps) => {
     try {
       const props = {...recordProps, createdAt: serverTimestamp()}
       const createdRecord = await addDoc(collection(db, collectionPath), props);
-      console.log("createdREcord", createdRecord);
-      return { id: createdRecord.id, ...createdRecord.data() };
+      return { id: createdRecord.id };
     } catch (e) {
       console.log(`error: ${e}`);
       return {}
@@ -33,8 +26,7 @@ export const useDatabase = (collectionPath) => {
 
   const deleteRecord = async (id) => {
     try {
-      const docRef = await getDoc(collection(db, collectionPath, id));
-      const data = await deleteDoc(docRef);
+      const data = await deleteDoc(doc(db, collectionPath, id));
       console.log("data in DELETE", data);
     } catch (e) {
       console.log(`error: ${e}`);
