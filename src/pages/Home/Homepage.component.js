@@ -25,8 +25,8 @@ export const Homepage = () => {
 
       {!currentUserUid && (
         <ThanksgivingText>
-          <Link to="/dashboard">Sign up</Link> or{" "}
-          <Link to="/dashboard">log in</Link> to add and see how many guests are
+          <Link to="/signup">Sign up</Link> or{" "}
+          <Link to="/login">log in</Link> to add and see how many guests are
           attending, what food is being brought and directions & info to the
           party!
         </ThanksgivingText>
