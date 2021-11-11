@@ -9,13 +9,14 @@ export const GuestCreate = ({ currentGuestId }) => {
   const [loading, setLoading] = useState(false);
   const { createRecord } = useDatabase(`guests`);
   const methods = useForm();
-  const { handleSubmit } = methods || {};
+  const { handleSubmit, reset } = methods || {};
 
   const handleGuestCreateSubmit = async (data) => {
     try {
       setLoading(true);
       const guestCreateData = formatGuestData({ ...data, parentGuestId: currentGuestId });
       await createRecord(guestCreateData);
+      reset();
       setLoading(false);
     } catch (e) {
       console.log(`FAILED CREATE createdGuest: ${e}`);

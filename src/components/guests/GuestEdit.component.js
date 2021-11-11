@@ -27,8 +27,7 @@ export const GuestEdit = ({ guestToEdit = {}, loading, setLoading }) => {
     try {
       setLoading(true);
       const dataToUpdate = formatGuestData(data);
-      const editedGuest = await updateRecord(guestId, dataToUpdate);
-      console.log("SUCCESS EDIT editedGuest", editedGuest);
+      await updateRecord(guestId, dataToUpdate);
       setLoading(false);
     } catch (e) {
       console.log(`FAILED EDIT editedGuest: ${e}`);
