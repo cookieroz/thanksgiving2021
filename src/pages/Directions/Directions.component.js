@@ -3,6 +3,7 @@ import { DirectionsIframe, DirectionsList } from "./styles";
 import {
   ThanksgivingHightlight,
   ThanksgivingPageWrapper,
+  ThanksgivingSpacer,
   ThanksgivingText,
   ThanksgivingTitle,
 } from "../../styles";
@@ -12,6 +13,7 @@ export const Directions = () => (
     <ThanksgivingTitle>
       Directions, Parking & Things to do close by
     </ThanksgivingTitle>
+
     <ThanksgivingText>
       The party is located at Calle Sierra Nevada, N24, Benalmadena, Malaga.
     </ThanksgivingText>
@@ -21,12 +23,16 @@ export const Directions = () => (
       loading="lazy"
     />
 
+    <ThanksgivingSpacer />
+
     <ThanksgivingHightlight>Parking</ThanksgivingHightlight>
     <ThanksgivingText>
       Parking is relatively easy and you will be able to find a spot to park on
       the street. You have to park ON the street. What that means is that you
       have to drive the wheels on to the pavement and park.
     </ThanksgivingText>
+
+    <ThanksgivingSpacer />
 
     <ThanksgivingHightlight>Things to do close by</ThanksgivingHightlight>
     <ThanksgivingText>

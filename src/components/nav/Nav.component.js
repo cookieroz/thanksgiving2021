@@ -1,12 +1,14 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { useAuth } from "../../contexts";
+import {useAuth, useThanksgiving} from "../../contexts";
 import { NavItem, NavWrapper } from "./styles";
 
 export const Nav = () => {
-  const { currentUserUid, logout } = useAuth();
+  const { logout } = useAuth();
   const history = useHistory();
+  const { currentGuest = {} } = useThanksgiving();
+  const { id, isAdmin } = currentGuest;
 
   const logUserOut = async () => {
     try {
@@ -23,7 +25,12 @@ export const Nav = () => {
       <NavItem>
         <Link to="/">Home</Link>
       </NavItem>
-      {currentUserUid && (
+      {isAdmin && (
+        <NavItem>
+          <Link to="/guest-list">Guest List</Link>
+        </NavItem>
+      )}
+      {id && (
         <>
           <NavItem>
             <Link to="/dashboard">Dashboard</Link>
@@ -34,7 +41,7 @@ export const Nav = () => {
         </>
       )}
       {/*<NavItem>Fun facts</NavItem>*/}
-      {!currentUserUid && (
+      {!id && (
         <>
           <NavItem>
             <Link to="/login">Log In</Link>
@@ -44,7 +51,7 @@ export const Nav = () => {
           </NavItem>
         </>
       )}
-      {currentUserUid && <NavItem onClick={logUserOut}>Logout</NavItem>}
+      {id && <NavItem onClick={logUserOut}>Logout</NavItem>}
     </NavWrapper>
   );
 };

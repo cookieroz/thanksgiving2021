@@ -20,6 +20,9 @@ export const ThanksgivingProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!currentUserUid) {
+      return;
+    }
     const q = query(collection(db, "guests"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let data = [];

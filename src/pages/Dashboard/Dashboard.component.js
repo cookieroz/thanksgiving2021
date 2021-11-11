@@ -31,7 +31,7 @@ export const Dashboard = () => {
 
   return (
     <ThanksgivingPageWrapper>
-      <DashboardGreeting>{`Hi ${currentGuest?.name}!`}</DashboardGreeting>
+      <DashboardGreeting>{`Hi 👋 ${currentGuest?.name}!`}</DashboardGreeting>
       <ThanksgivingTitle>Current party stats</ThanksgivingTitle>
 
       <ThanksgivingSpacer />

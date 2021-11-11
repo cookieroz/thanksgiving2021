@@ -49,7 +49,7 @@ export const GuestRow = ({ guestToEdit = {}, isCurrentUser }) => {
   );
 };
 
-const GuestRowText = ({
+export const GuestRowText = ({
   attending,
   location,
   isCurrentUser,

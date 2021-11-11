@@ -10,7 +10,7 @@ export const GuestForm = ({
   isLoading,
   onSubmit,
   submitText = "Add Guest",
-  title = "Add a Guest",
+  title = "🍽️ Add a Guest 🍽️",
 }) => (
   <div>
     {title && <ThanksgivingTitle>{title}</ThanksgivingTitle>}
