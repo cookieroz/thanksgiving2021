@@ -2,21 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import { CountdownClock } from "./CountdownClock.component";
 import { CountdownTitle, CountdownWrapper } from "./styles";
-import { getDistance, getCountdownMessage, THANKSGIVING_DATE } from "./utils";
+import {
+  getDistance,
+  getCountdownMessage,
+  THANKSGIVING_DATE,
+  getDateLocal,
+} from "./utils";
 
 export const Countdown = () => {
   const [hasCountdown, setHasCountdown] = useState(false);
   const [message, setMessage] = useState("");
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const thanksgivingDate = new Date(THANKSGIVING_DATE).toLocaleDateString(
-    "en-GB",
-    options
-  );
+
+  const thanksgivingDate = getDateLocal(THANKSGIVING_DATE);
 
   useEffect(() => {
     setHasCountdown(getDistance() > 0);

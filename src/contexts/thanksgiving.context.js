@@ -23,20 +23,6 @@ export const ThanksgivingProvider = ({ children }) => {
     if (!currentUserUid) {
       return;
     }
-    const q = query(collection(db, "guests"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let data = [];
-      querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
-      setGuests(data);
-    });
-
-    return () => unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    if (!currentUserUid) {
-      return;
-    }
     (async () => {
       try {
         setLoading(true);
@@ -56,6 +42,21 @@ export const ThanksgivingProvider = ({ children }) => {
     })();
   }, [currentUserUid]);
 
+  useEffect(() => {
+    if (!currentUserUid) {
+      return;
+    }
+
+    const guestQuery = query(collection(db, "guests"));
+    const unsubscribeGuests = onSnapshot(guestQuery, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
+      setGuests(data);
+    });
+
+    return () => unsubscribeGuests
+  }, []);
+
   const potluck = useMemo(
     () => guests?.map(({ potluck }) => potluck),
     [guests]
@@ -64,7 +65,7 @@ export const ThanksgivingProvider = ({ children }) => {
   const myGuests = useMemo(
     () =>
       guests?.filter(
-        ({ id, parentGuestId }) =>
+        ({ id, parentGuestId } = {}) =>
           parentGuestId === currentGuest.id || id === currentGuest.id
       ),
     [currentGuest.id, guests]

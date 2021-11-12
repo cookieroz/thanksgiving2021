@@ -36,6 +36,9 @@ export const Nav = () => {
             <Link to="/dashboard">Dashboard</Link>
           </NavItem>
           <NavItem>
+            <Link to="/news">News</Link>
+          </NavItem>
+          <NavItem>
             <Link to="/directions">Directions</Link>
           </NavItem>
         </>

@@ -7,8 +7,17 @@ export const minute = second * 60;
 export const hour = minute * 60;
 export const day = hour * 24;
 
+const localOptions = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
 export const getDistance = () => thanksgivingDateTime - getNowTime();
 export const isPlural = (count, word) => (count === 1 ? word : `${word}s`);
+export const getDateLocal = (date, options = localOptions) =>
+  new Date(date).toLocaleDateString("en-GB", options);
 
 export const getDaysPast = () => {
   const now = getNowTime();
@@ -24,7 +33,10 @@ export const getCountdownMessage = () => {
     const daysPast = getDaysPast();
     return daysPast < hour * 12
       ? `🍗 Today is Thanksgiving! 🍗`
-      : `🍁 ${daysPast} ${isPlural(daysPast, "day")} since Thanksgiving 2021. 🍁`;
+      : `🍁 ${daysPast} ${isPlural(
+          daysPast,
+          "day"
+        )} since Thanksgiving 2021. 🍁`;
   } else {
     return `🍂 Woohoo Countdown is on! 🍂`;
   }

@@ -10,6 +10,7 @@ import { Directions } from "./pages/Directions";
 import { Homepage } from "./pages/Home";
 import { GuestList } from "./pages/GuestList";
 import { LoginPage } from "./pages/Login";
+import { News } from "./pages/News";
 import { SignUpPage } from "./pages/SignUp";
 
 import { GlobalResetStyle, ThanksgivingContentWrapper } from "./styles";
@@ -29,6 +30,7 @@ const App = () => {
               <PrivateRoute path="/dashboard" exact component={Dashboard} />
               <PrivateRoute path="/directions" exact component={Directions} />
               <PrivateRoute path="/guest-list" exact component={GuestList} />
+              <PrivateRoute path="/news" exact component={News} />
             </Switch>
           </ThanksgivingContentWrapper>
         </ThanksgivingProvider>

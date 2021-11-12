@@ -21,11 +21,11 @@ import { GuestCreate, GuestRow } from "../../components/guests";
 export const Dashboard = () => {
   const { currentGuest, guests, myGuests, potluck } = useThanksgiving();
   const totalYes = useMemo(
-    () => guests?.filter(({ attending }) => Number(attending) === 1)?.length,
+    () => guests?.filter(({ attending } = {}) => Number(attending) === 1)?.length,
     [guests]
   );
   const totalMaybes = useMemo(
-    () => guests?.filter(({ attending }) => Number(attending) === 2)?.length,
+    () => guests?.filter(({ attending } = {}) => Number(attending) === 2)?.length,
     [guests]
   );
 
