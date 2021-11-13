@@ -7,7 +7,12 @@ export const NewsAccordionWrapper = styled.div`
   transition: all 1s;
 `;
 
-export const NewsAccordionContentWrapper = styled.div``;
+export const NewsAccordionContentWrapper = styled.div`
+	.ProseMirror {
+		background-color: ${COLORS.militaryGreen};
+		padding: 1rem;
+	}
+`;
 
 export const NewsAccordionTitleWrapper = styled.div`
   cursor: pointer;

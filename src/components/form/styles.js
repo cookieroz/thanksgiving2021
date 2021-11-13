@@ -19,6 +19,11 @@ export const FieldWrapperStyled = styled.div`
   label {
     font-size: 14px;
   }
+  
+  .ProseMirror {
+    min-height: 10rem;
+    padding: 0.5rem;
+  }
 `;
 
 export const FieldError = styled.small`

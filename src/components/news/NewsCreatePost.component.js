@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, Controller } from "react-hook-form";
+import MarkdownEditor from "rich-markdown-editor";
 
 import { useDatabase } from "../../hooks/useDatabaseService.hook";
 import { FieldWrapper, SubmitComponent } from "../form";
 import { NEWS_FORM_FIELDS } from "./constants";
-import {ThanksgivingTitle} from "../../styles";
+import { ThanksgivingTitle } from "../../styles";
 
 export const NewsPostCreate = () => {
   const [loading, setLoading] = useState(false);
   const { createRecord } = useDatabase("news");
   const methods = useForm();
-  const { handleSubmit, register, reset } = methods || {};
+  const { control, handleSubmit, register, reset } = methods || {};
 
   const handleCreateNewsPostSubmit = async (data) => {
     try {
       setLoading(true);
-      await createRecord(data);
+      await createRecord({ title: data?.title, content: data?.myField});
       reset();
       setLoading(false);
     } catch (e) {
@@ -41,20 +42,20 @@ export const NewsPostCreate = () => {
             />
           </FieldWrapper>
 
-          <FieldWrapper fieldName={NEWS_FORM_FIELDS.content} label="Post content">
-          <textarea
-            cols="30"
-            disabled={loading}
-            name="textarea"
-            placeholder="Enter party updates here."
-            {...register(NEWS_FORM_FIELDS.content, {
-              required: {
-                value: true,
-                message: " 🤌 Please enter content for the post. 🤌",
-              },
-            })}
-            rows="5"
-          />
+          <FieldWrapper fieldName={NEWS_FORM_FIELDS.content} label="Content">
+            <Controller
+              control={control}
+              name="myField"
+              render={({ field: { onChange } }) => (
+                <MarkdownEditor
+                  disabled={loading}
+                  id={NEWS_FORM_FIELDS.content}
+                  name={NEWS_FORM_FIELDS.content}
+                  onChange={(getValue) => onChange(getValue())}
+                  placeholder="Enter party updates here."
+                />
+              )}
+            />
           </FieldWrapper>
 
           <SubmitComponent value={loading ? "loading ..." : "Submit"} />

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import MarkdownEditor from "rich-markdown-editor";
 
 import { getDateLocal } from "../countdown";
 import {
-  NewsAccordionContentWrapper, NewsAccordionTitle,
+  NewsAccordionContentWrapper,
+  NewsAccordionTitle,
   NewsAccordionTitleWrapper,
   NewsAccordionWrapper,
 } from "./styles";
@@ -26,7 +28,9 @@ export const NewsAccordion = ({ content, createdAt, title }) => {
         </NewsAccordionTitle>
       </NewsAccordionTitleWrapper>
       {isActive && (
-        <NewsAccordionContentWrapper>{content}</NewsAccordionContentWrapper>
+        <NewsAccordionContentWrapper>
+          <MarkdownEditor defaultValue={content} readOnly={true} />
+        </NewsAccordionContentWrapper>
       )}
     </NewsAccordionWrapper>
   );
