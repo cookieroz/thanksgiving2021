@@ -9,13 +9,17 @@ export const NavWrapper = styled.nav`
   justify-content: center;
 `;
 
+const NavLinkActiveStyles = css`
+  background-color: ${COLORS.sand};
+  cursor: pointer;
+`;
+
 const NavLinkStyles = css`
   color: ${COLORS.darkerGreen};
   text-decoration: none;
 
   &:hover {
-    background-color: ${COLORS.sand};
-    cursor: pointer;
+    ${NavLinkActiveStyles};
   }
 `;
 
@@ -26,4 +30,6 @@ export const NavItem = styled.div`
   a {
     ${NavLinkStyles};
   }
+  
+  ${({ isActive }) => isActive && NavLinkActiveStyles };
 `;

@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
-import {useAuth, useThanksgiving} from "../../contexts";
+import { useAuth, useThanksgiving } from "../../contexts";
 import { NavItem, NavWrapper } from "./styles";
 
 export const Nav = () => {
@@ -22,39 +22,35 @@ export const Nav = () => {
 
   return (
     <NavWrapper>
-      <NavItem>
-        <Link to="/">Home</Link>
-      </NavItem>
+      <NavItemComponent displayText="Home" path="/" />
       {isAdmin && (
-        <NavItem>
-          <Link to="/guest-list">Guest List</Link>
-        </NavItem>
+        <NavItemComponent displayText="Guest List" path="/guest-list" />
       )}
       {id && (
         <>
-          <NavItem>
-            <Link to="/dashboard">Dashboard</Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/news">News</Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/directions">Directions</Link>
-          </NavItem>
+          <NavItemComponent displayText="Dashboard" path="/dashboard" />
+          <NavItemComponent displayText="News" path="/news" />
+          <NavItemComponent displayText="Directions" path="/directions" />
         </>
       )}
       {/*<NavItem>Fun facts</NavItem>*/}
       {!id && (
         <>
-          <NavItem>
-            <Link to="/login">Log In</Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/sign-up">Sign Up</Link>
-          </NavItem>
+          <NavItemComponent displayText="Log In" path="/login" />
+          <NavItemComponent displayText="Sign Up" path="/sign-up" />
         </>
       )}
       {id && <NavItem onClick={logUserOut}>Logout</NavItem>}
     </NavWrapper>
+  );
+};
+
+const NavItemComponent = ({ displayText, path }) => {
+  const { pathname: currentPath } = useLocation();
+
+  return (
+    <NavItem isActive={currentPath === path}>
+      <Link to={path}>{displayText}</Link>
+    </NavItem>
   );
 };
