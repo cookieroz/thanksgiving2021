@@ -1,12 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import { ThanksgivingHightlight } from "../../styles";
 import { LoadingText } from "../loading/styles";
 
 import { getDateLocal } from "../countdown";
-import { NewsWidgetWrapper } from "./styles";
+import { NewsWidgetTitle, NewsWidgetWrapper } from "./styles";
 import { useGetNews } from "./useGetNews.hook";
-import {Link} from "react-router-dom";
 
 export const NewsWidget = () => {
   const { error, loading, news = [] } = useGetNews();
@@ -14,7 +13,9 @@ export const NewsWidget = () => {
 
   return (
     <NewsWidgetWrapper>
-      <ThanksgivingHightlight>✨ <Link to="/news">Latest News</Link> ✨</ThanksgivingHightlight>
+      <NewsWidgetTitle>
+        ✨ <Link to="/news">Latest News</Link> ✨
+      </NewsWidgetTitle>
       {loading ? (
         <LoadingText />
       ) : error ? (

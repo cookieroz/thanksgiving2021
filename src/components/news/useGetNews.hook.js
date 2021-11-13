@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react";
-import { useDatabase } from "../../hooks/useDatabaseService.hook";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export const useGetNews = () => {
-  const { getAll } = useDatabase("news");
-
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        let allNews = await getAll();
-        allNews = allNews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const q = query(collection(db, "news"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let data = [];
+      querySnapshot.forEach((doc) => data.push(doc.data()));
+      setNews(data);
+    });
 
-        setNews(allNews);
-        setError(false);
-        setLoading(false);
-      } catch (e) {
-        setError(`error loading news data: ${e}`);
-        setLoading(false);
-      }
-    })();
+    return () => unsub;
   }, []);
 
-  return { error, loading, news };
+  return { news };
 };

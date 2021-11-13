@@ -1,19 +1,17 @@
 import React from "react";
 
-// import { useThanksgiving } from "../../contexts";
+import { useGetNews } from "../../components/news/useGetNews.hook";
+import { NewsAccordion, NewsPostCreate } from "../../components/news";
+import { useThanksgiving } from "../../contexts";
 import {
-  // ThanksgivingHightlight,
   ThanksgivingPageWrapper,
   ThanksgivingSpacer,
-  // ThanksgivingText,
   ThanksgivingTitle,
 } from "../../styles";
-import { useGetNews } from "../../components/news/useGetNews.hook";
-import { LoadingText } from "../../components/loading/styles";
-import {NewsAccordion} from "../../components/news";
 
 export const News = () => {
-  const { error, loading, news } = useGetNews();
+  const { currentGuest = {} } = useThanksgiving();
+  const { news } = useGetNews();
 
   return (
     <ThanksgivingPageWrapper>
@@ -21,15 +19,11 @@ export const News = () => {
 
       <ThanksgivingSpacer />
 
-      {loading ? (
-        <LoadingText />
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        news?.map((post) => (
-        	<NewsAccordion key={`${post?.title}-${post?.createdAt}`} {...post} />
-        ))
-      )}
+      {news?.map((post) => (
+        <NewsAccordion key={`${post?.title}-${post?.createdAt}`} {...post} />
+      ))}
+
+      {currentGuest?.isAdmin && <NewsPostCreate />}
     </ThanksgivingPageWrapper>
   );
 };

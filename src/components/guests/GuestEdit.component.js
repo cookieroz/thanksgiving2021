@@ -7,7 +7,12 @@ import { GUEST_FORM_FIELDS } from "./constants";
 import { GuestEditWrapper } from "./styles";
 import { formatGuestData } from "./utils";
 
-export const GuestEdit = ({ guestToEdit = {}, loading, setLoading }) => {
+export const GuestEdit = ({
+  afterEditUpdate,
+  guestToEdit = {},
+  loading,
+  setLoading,
+}) => {
   const { id: guestId } = guestToEdit;
   const { updateRecord } = useDatabase(`guests`);
   const methods = useForm({
@@ -29,6 +34,7 @@ export const GuestEdit = ({ guestToEdit = {}, loading, setLoading }) => {
       const dataToUpdate = formatGuestData(data);
       await updateRecord(guestId, dataToUpdate);
       setLoading(false);
+      afterEditUpdate && afterEditUpdate();
     } catch (e) {
       console.log(`FAILED EDIT editedGuest: ${e}`);
       setLoading(false);

@@ -22,7 +22,7 @@ export const GuestForm = ({
         registerOptions={{
           required: {
             value: true,
-            message: "Please enter guest name.",
+            message: "🤌 Please enter guest name. 🤌",
           },
         }}
         label="Name"

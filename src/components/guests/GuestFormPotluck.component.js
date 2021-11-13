@@ -12,7 +12,7 @@ export const GuestFormPotluck = ({ isEdit, isLoading }) => {
   const PotluckItemLabel = `What are you planning on bringing?
    (examples: starter, dessert, brownies, chips, rice, dips, cups, gin, chairs, a smile, cameras, etc)`;
   const PotluckItemErrorMessage =
-    "Please enter something for what you are planning to bring.";
+    "🤌 Please enter something for what you are planning to bring. 🤌";
   const { watch } = useFormContext();
 
   const watchAttending = watch(attending);

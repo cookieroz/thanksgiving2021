@@ -42,7 +42,7 @@ export const NewsWidgetWrapper = styled.div`
 
   ul,
   li {
-    margin-left: 1rem;
+    margin-left: 2rem;
   }
 
   small {
@@ -51,4 +51,13 @@ export const NewsWidgetWrapper = styled.div`
     line-height: 150%;
     margin-left: 1rem;
   }
+`;
+
+export const NewsWidgetTitle = styled(ThanksgivingHightlight)`
+	color: ${COLORS.nude};
+	margin-left: 1rem;
+	
+	a {
+		color: ${COLORS.nude};
+	}
 `;

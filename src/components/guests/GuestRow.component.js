@@ -16,18 +16,21 @@ export const GuestRow = ({ guestToEdit = {}, isCurrentUser }) => {
   const { deleteRecord } = useDatabase(`guests`);
   const [isEditMode, setIsEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
-  const toggleEditMode = () => !loading && setIsEditMode(!isEditMode);
+
+  const afterEditUpdate = () => setIsEditMode(false);
   const deleteGuest = async () => {
     setLoading(true);
     console.log("deleting guest");
     await deleteRecord(guestToEdit?.id);
     setLoading(false);
   };
+  const toggleEditMode = () => !loading && setIsEditMode(!isEditMode);
 
   return (
     <GuestRowWrapper>
       {isEditMode ? (
         <GuestEdit
+          afterEditUpdate={afterEditUpdate}
           guestToEdit={guestToEdit}
           loading={loading}
           setLoading={setLoading}
